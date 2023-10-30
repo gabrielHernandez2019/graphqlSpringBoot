@@ -13,6 +13,8 @@ import com.globallogic.graphql.record.ModelRecord;
 import com.globallogic.graphql.record.ResultRecord;
 import com.globallogic.graphql.repository.RickyMortyRepository;
 
+import graphql.GraphQLException;
+
 @Service
 public class RickyMortyServiceImpl implements RickyMortyService {
 	
@@ -55,6 +57,9 @@ public class RickyMortyServiceImpl implements RickyMortyService {
 	public CharacterEntity saveCharacter(CharacterInput input) {
 		CharacterEntity entity =  new CharacterEntity();
 		entity.setName(input.name());
+		if (input.name().equalsIgnoreCase("exception")) {
+			throw new GraphQLException("recurso no accesible");
+		}
 		return repository.save(entity);
 	}
 	
