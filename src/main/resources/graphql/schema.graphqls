@@ -38,3 +38,12 @@ type Episode{
 	created: String
 }
 
+type Mutation {
+	createCharacter(characterInput: CharacterInput!): Character
+}
+
+input CharacterInput {
+	name: String 
+}
+
+

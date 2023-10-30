@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.globallogic.graphql.client.RickyMortyClient;
 import com.globallogic.graphql.entity.CharacterEntity;
-import com.globallogic.graphql.record.CharacterRecord;
+import com.globallogic.graphql.record.CharacterInput;
 import com.globallogic.graphql.record.ModelRecord;
 import com.globallogic.graphql.record.ResultRecord;
 import com.globallogic.graphql.repository.RickyMortyRepository;
@@ -50,6 +50,12 @@ public class RickyMortyServiceImpl implements RickyMortyService {
 	
 	public List<CharacterEntity> getCharactersGraphQl() {
 		return repository.findAll();
+	}
+	
+	public CharacterEntity saveCharacter(CharacterInput input) {
+		CharacterEntity entity =  new CharacterEntity();
+		entity.setName(input.name());
+		return repository.save(entity);
 	}
 	
 
