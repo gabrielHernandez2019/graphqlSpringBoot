@@ -40,6 +40,8 @@ public class RickyMortyClientImpl implements RickyMortyClient {
 				.bodyToMono(ModelRecord.class)
 				.block();
 
+		log.info("data from webClient------> {}", data.toString());
+		
 		graphCliente = HttpGraphQlClient.builder(webCliente).build();
 		ClientGraphQlResponse resp = graphCliente
 				.document(query)
@@ -47,7 +49,7 @@ public class RickyMortyClientImpl implements RickyMortyClient {
 				.block();
 
 		LinkedHashMap<String, Object> dt = resp.getData();
-		log.info("data from graphQl------> {}", dt.toString());
+		log.info("data from graphClient------> {}", dt.toString());
 		return data;
 	}
 

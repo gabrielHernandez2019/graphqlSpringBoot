@@ -1,15 +1,9 @@
 package com.globallogic.graphql.entity;
 
-import java.util.Set;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,8 +24,7 @@ public class CharacterEntity {
 	private String type;
 	private String gender;
 	private String origin;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "characterEntity",fetch = FetchType.LAZY)
-	private Set<CharacterLocationEntity> locations;
+	private String locations;
 	private String image;
 	private String episode;
 	private String url;
