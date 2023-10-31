@@ -20,21 +20,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CharacterEntity {
+public class LocationEntity {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	private Integer id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id; 
 	private String name;
-	private String status;
-	private String species;	
-	private String type;
-	private String gender;
-	private String origin;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "characterEntity",fetch = FetchType.LAZY)
-	private Set<CharacterLocationEntity> locations;
-	private String image;
-	private String episode;
+	private String type; 
+	private String dimension; 
+	private String residents; 
 	private String url;
 	private String created;
-
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "locationEntity")
+	private Set<CharacterLocationEntity> characters;
+	
 }

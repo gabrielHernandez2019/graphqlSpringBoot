@@ -21,12 +21,12 @@ public class RickyMortyServiceImpl implements RickyMortyService {
 
 	private RickyMortyClient rickyMortyClient;
 	
-	private RickyMortyRepository repository;
+	private RickyMortyRepository repositoryCharacters;
 	
 	@Autowired
 	public RickyMortyServiceImpl(RickyMortyClient rickyMortyClient, RickyMortyRepository repository){
 		this.rickyMortyClient = rickyMortyClient;
-		this.repository = repository;
+		this.repositoryCharacters = repository;
 	}
 	
 	
@@ -34,7 +34,7 @@ public class RickyMortyServiceImpl implements RickyMortyService {
 		ModelRecord model = rickyMortyClient.getcharacters();
 		List<ResultRecord> character =  model.data().characters().results();
 		List<CharacterEntity> entitySaves = new ArrayList<CharacterEntity>();
-		repository.deleteAll();
+		repositoryCharacters.deleteAll();
 		for (ResultRecord resultRecord : character) {
 			 
 			entitySaves.add(CharacterEntity.builder()
@@ -45,14 +45,15 @@ public class RickyMortyServiceImpl implements RickyMortyService {
 					.status(resultRecord.status())
 					.build());
 		}
-		repository.saveAll(entitySaves);
+		repositoryCharacters.saveAll(entitySaves);
 		
 		return model; 
 	}
 	
 	public List<CharacterEntity> getCharactersGraphQl() {
-		return repository.findAll();
+		return repositoryCharacters.findAll();
 	}
+	
 	
 	public CharacterEntity saveCharacter(CharacterInput input) {
 		CharacterEntity entity =  new CharacterEntity();
@@ -60,7 +61,11 @@ public class RickyMortyServiceImpl implements RickyMortyService {
 		if (input.name().equalsIgnoreCase("exception")) {
 			throw new GraphQLException("recurso no accesible");
 		}
-		return repository.save(entity);
+		return repositoryCharacters.save(entity);
+	}
+	
+	public List<CharacterEntity> getLocationGraphQl() {
+		return repositoryCharacters.findAll();
 	}
 	
 

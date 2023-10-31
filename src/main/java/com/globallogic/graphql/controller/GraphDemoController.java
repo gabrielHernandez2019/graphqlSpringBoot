@@ -25,9 +25,7 @@ public class GraphDemoController {
 
 	@PostMapping("/v1/apigraph/characters")
 	public ResponseEntity<ModelRecord> getCharacters() {
-
 		return ResponseEntity.ok().body(rickyMortyService.getCharacters());
-
 	}
 
 	@QueryMapping
@@ -36,11 +34,15 @@ public class GraphDemoController {
 
 	}
 	
+	@QueryMapping
+	public List<CharacterEntity> locations() {
+		return rickyMortyService.getCharactersGraphQl();
+
+	}
+
 	@MutationMapping
 	public CharacterEntity createCharacter(@Argument CharacterInput characterInput) {
-		
 		return rickyMortyService.saveCharacter(characterInput);
-		
 	}
 
 }
