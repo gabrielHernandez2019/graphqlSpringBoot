@@ -23,28 +23,40 @@ public class GraphDemoController {
 		this.rickyMortyService = rickyMortyService;
 	}
 
+	/**
+	 * Cliente Rest Tradicional para obtener datos de una api GraphQl
+	 * @return ModelRecord
+	 */
 	@PostMapping("/v1/apigraph/characters")
 	public ResponseEntity<ModelRecord> getCharacters() {
 		return ResponseEntity.ok().body(rickyMortyService.getCharacters());
 	}
 
-	@QueryMapping
+	
+	/**
+	 * Cliente Rest tradicional mezclado con query mapping para consultar una api GraphQl
+	 * @return ModelRecord
+	 */
+	@QueryMapping 
 	public ModelRecord getCharactersGraphQl() {
 		return rickyMortyService.getCharacters();
 	}
 	
+	/**
+	 * Obtener datos de una base de datos para convertir mi api en un GraphQl
+	 * @return List<CharacterEntity>
+	 */
 	@QueryMapping
 	public List<CharacterEntity> characters() {
 		return rickyMortyService.getCharactersGraphQl();
 
 	}
 	
-	@QueryMapping
-	public List<CharacterEntity> locations() {
-		return rickyMortyService.getCharactersGraphQl();
-
-	}
-
+	/**
+	 * Mutation se utiliza para Crear Actualizar Eliminar
+	 * @param characterInput
+	 * @return
+	 */
 	@MutationMapping
 	public CharacterEntity createCharacter(@Argument CharacterInput characterInput) {
 		return rickyMortyService.saveCharacter(characterInput);
