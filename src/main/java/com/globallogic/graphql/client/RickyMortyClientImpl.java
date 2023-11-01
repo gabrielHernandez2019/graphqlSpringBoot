@@ -32,7 +32,7 @@ public class RickyMortyClientImpl implements RickyMortyClient {
 	public ModelRecord getcharacters() {
 		// pasar el grapho como si estuvieramos en el cliente nativo
 
-		String query = "query { characters{results{id name image gender}}}";
+		String query = "query { characters{results{id name image gender location {id name }}}}";
 
 		ModelRecord data = webCliente.post()
 				.bodyValue(new QueryRequestRecord(query, null))

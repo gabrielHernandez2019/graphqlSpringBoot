@@ -29,6 +29,11 @@ public class GraphDemoController {
 	}
 
 	@QueryMapping
+	public ModelRecord getCharactersGraphQl() {
+		return rickyMortyService.getCharacters();
+	}
+	
+	@QueryMapping
 	public List<CharacterEntity> characters() {
 		return rickyMortyService.getCharactersGraphQl();
 
